@@ -1,9 +1,19 @@
-var express = require('express');
-var app = express();
+const { response } = require('express');
+const express = require('express');
 
-app.get("/",(req,res)=>{
-    res.send("<h1>Hello World</h1>")
+const app = express();
+
+app.use(express.json());
+
+
+app.get('/',(request,response)=>{
+    return response.json({message:'Server is up'});
 })
 
-app.listen(3000, () => console.log('Server rodando...'))
+app.post('/teste',(request,response)=>{
+    const{name,date} = request.body;
+    return response.json({name,date})
+})
+
+app.listen(3000)
 
